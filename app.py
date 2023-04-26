@@ -1,5 +1,7 @@
 from flask import Flask, request,render_template
 import requests
+import pandas as pd
+import json
 
 app = Flask(__name__)
 
@@ -12,18 +14,21 @@ def search_api():
         # REST API'ye istek gönderelim
         response = requests.get('https://fakestoreapi.com/products/' + query)
         
-        # API'den gelen cevabı döndürelim
-        return response.content       
+        # API yanıtını bir değişkene ata
+        try:
+            result = response.json()  
+    
+            # Sonucu bir Flask şablonunda kullanmak için değişkeni geri döndür
+            return render_template('index.html', result=result)  
+        except Exception as ex:
+            print(f'Sonuç bulunamadı. {ex}')
+            error = (f'Sonuç bulunamadı. {ex}') 
+            return render_template('index.html', error=error)  
+    
     
     # GET istekleri için basit bir HTML formu döndürelim
     
     return render_template("index.html")
-    # return '''
-    #     <form method="post">
-    #         <input type="text" name="query" placeholder="Aranacak değer...">
-    #         <input type="submit" value="Ara">
-    #     </form>
-    # '''
 
 if __name__ == '__main__':
     app.run(port=5001,debug=True)
