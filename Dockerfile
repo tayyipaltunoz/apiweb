@@ -15,6 +15,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # copy the content of the local src directory to the working directory
 COPY . /app
 
+EXPOSE 5001 
+
 # command to run on container start
 CMD [ "python", "./app.py" ]
 
