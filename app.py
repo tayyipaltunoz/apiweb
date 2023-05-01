@@ -10,23 +10,30 @@ app = Flask(__name__, static_folder='static', static_url_path='/')
 def search_api():
     if request.method == 'POST':
         # Kullanıcının girdiği değeri alalım
-        query = request.form['query']
+        query = request.form['query'].upper()
+        
+        if query == "" :
+            pass
+        
+        else :
+            
+            
 
-        # REST API'ye istek gönderelim
-        response = requests.get('https://fakestoreapi.com/products/' + query)
+            # REST API'ye istek gönderelim
+            response = requests.get('https://fakestoreapi.com/products/' + query)
 
-        # API yanıtını bir değişkene ata
-        try:
-            result = response.json()
+            # API yanıtını bir değişkene ata
+            try:
+                result = response.json()
 
-            # Sonucu bir Flask şablonunda kullanmak için değişkeni geri döndür
-            return render_template('index.html', result=result)
-        except Exception as ex:
-            print(f'Sonuç bulunamadı. {ex}')
-            error = (f'"{query}" için sonuç bulunamadı. {ex}')
-            return render_template('index.html', error=error)
+                # Sonucu bir Flask şablonunda kullanmak için değişkeni geri döndür
+                return render_template('index.html', result=result)
+            except Exception as ex:
+                print(f'Sonuç bulunamadı. {ex}')
+                error = (f'"{query}" için sonuç bulunamadı. {ex}')
+                return render_template('index.html', error=error)
 
-        # GET istekleri için basit bir HTML formu döndürelim
+            # GET istekleri için basit bir HTML formu döndürelim
 
     return render_template("index.html")
 
