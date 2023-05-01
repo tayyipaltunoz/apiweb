@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template
 import requests
-import pandas as pd
-import json
+# import pandas as pd
+# import json
 
 app = Flask(__name__)
 
@@ -23,7 +23,7 @@ def search_api():
             return render_template('index.html', result=result)
         except Exception as ex:
             print(f'Sonuç bulunamadı. {ex}')
-            error = (f'Sonuç bulunamadı. {ex}')
+            error = (f'"{query}" için sonuç bulunamadı. {ex}')
             return render_template('index.html', error=error)
 
         # GET istekleri için basit bir HTML formu döndürelim
@@ -33,3 +33,7 @@ def search_api():
 
 if __name__ == '__main__':
     app.run(port=5001, debug=True)
+
+
+# git config --global user.email "tayyip.altunoz@hotmail.com"
+#   git config --global user.name "tayyipaltunoz"
