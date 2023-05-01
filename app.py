@@ -3,7 +3,7 @@ import requests
 # import pandas as pd
 # import json
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static', static_url_path='/')
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -33,7 +33,4 @@ def search_api():
 
 if __name__ == '__main__':
     app.run(port=5001, debug=True)
-
-
-# git config --global user.email "tayyip.altunoz@hotmail.com"
-#   git config --global user.name "tayyipaltunoz"
+    
