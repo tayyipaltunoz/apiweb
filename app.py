@@ -33,7 +33,6 @@ def search_api():
                 error = (f'"{query}" için sonuç bulunamadı. {ex}')
                 return render_template('index.html', error=error)
 
-            # GET istekleri için basit bir HTML formu döndürelim
 
     return render_template("index.html")
 

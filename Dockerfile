@@ -5,7 +5,7 @@ FROM python:3.11-alpine
 WORKDIR /app
 
 # copy the dependencies file to the working directory
-COPY requirements.txt .
+#COPY requirements.txt .
 
 # install dependencies
 RUN apk update && apk add --no-cache gcc musl-dev linux-headers
